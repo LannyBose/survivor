@@ -3,16 +3,6 @@ defmodule Survivor do
   Documentation for `Survivor`.
   """
 
-  @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> Survivor.hello()
-      :world
-
-  """
-
   @picks_so_far [
     %Survivor.Probabilities{
       is_completed: true,
