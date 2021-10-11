@@ -59,7 +59,7 @@ defmodule Survivor.Probabilities do
           date: Date.from_iso8601!(game.date),
           team: game.team1,
           win_probability: String.to_float(game.qbelo_prob1),
-          is_completed: not is_nil(game.score1),
+          is_completed: "" != game.score1,
           week: get_week(Date.from_iso8601!(game.date))
         }
       )
@@ -69,7 +69,7 @@ defmodule Survivor.Probabilities do
           date: Date.from_iso8601!(game.date),
           team: game.team2,
           win_probability: String.to_float(game.qbelo_prob2),
-          is_completed: not is_nil(game.score2),
+          is_completed: "" != game.score2,
           week: get_week(Date.from_iso8601!(game.date))
         }
       )
@@ -92,7 +92,9 @@ defmodule Survivor.Probabilities do
     %{week: 13, start: ~D[2021-11-30], end: ~D[2021-12-06]},
     %{week: 14, start: ~D[2021-12-07], end: ~D[2021-12-13]},
     %{week: 15, start: ~D[2021-12-14], end: ~D[2021-12-20]},
-    %{week: 16, start: ~D[2021-12-21], end: ~D[2021-12-27]}
+    %{week: 16, start: ~D[2021-12-21], end: ~D[2021-12-27]},
+    %{week: 17, start: ~D[2021-12-28], end: ~D[2022-01-03]},
+    %{week: 18, start: ~D[2022-01-04], end: ~D[2022-01-10]}
   ]
 
   def get_week(date) do
