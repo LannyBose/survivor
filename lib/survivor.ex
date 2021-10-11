@@ -49,8 +49,14 @@ defmodule Survivor do
   @week 6
 
   def project(week \\ @week, picks \\ @picks_so_far) do
-    Survivor.Picks.run(week, picks)
-    |> Enum.sort_by(fn picks -> picks.probability end, :desc)
-    |> Enum.take(1)
+    {microseconds, results} =
+      :timer.tc(fn ->
+        Survivor.Picks.run(week, picks)
+        |> Enum.sort_by(fn picks -> picks.probability end, :desc)
+      end)
+
+    seconds = microseconds / 1_000_000
+    IO.puts("Completed projections in #{seconds} seconds, evaluating #{length(results)} paths.")
+    Enum.at(results, 0)
   end
 end

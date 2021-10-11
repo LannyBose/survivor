@@ -3,8 +3,8 @@ defmodule Survivor.Picks do
   alias Survivor.Probabilities
   defstruct [:picks, :probability, :expected_return]
 
-  @win_probability_threshold 0.7
-  @end_week 19
+  @win_probability_threshold 0.72
+  @end_week 17
 
   def run(week \\ 1, picks \\ []) do
     probs_by_week =
