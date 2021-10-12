@@ -16,7 +16,7 @@ defmodule Survivor.Picks do
 
   def stream_picks(@end_week, _, picks) do
     probability = Enum.reduce(picks, 1, fn pick, acc -> acc * pick.win_probability end)
-    IO.puts("Pickset #{System.unique_integer(~w[monotonic positive]a)}")
+    # IO.puts("Pickset #{System.unique_integer(~w[monotonic positive]a)}")
 
     [
       %Picks{
@@ -48,7 +48,7 @@ defmodule Survivor.Picks do
 
   def build_picks(@end_week, _, picks) do
     probability = Enum.reduce(picks, 1, fn pick, acc -> acc * pick.win_probability end)
-    IO.puts("Pickset #{System.unique_integer(~w[monotonic positive]a)}")
+    # IO.puts("Pickset #{System.unique_integer(~w[monotonic positive]a)}")
 
     [
       %Picks{
