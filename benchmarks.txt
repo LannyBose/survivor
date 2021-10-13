@@ -1,0 +1,61 @@
+Benchmarking for week = 1, picks = [] (no logging until 0.69)
+
+Threshold   Func                Paths      Time     Memory
+0.73        Enum              462_734      2.44
+0.73        Stream            462_734      2.83
+0.73        Stream/Path       161_729      2.34
+
+0.72        Enum            1_277_073      8.08
+0.72        Stream          1_277_073      7.38
+0.72        Stream/Path       418_299      5.72
+
+0.71        Enum            4_509_226     28.96
+0.71        Stream          4_509_226     21.01
+0.71        Stream/Path     1_349_684     15.23
+
+0.70        Enum            2_433_220    108.62    9.99 GB
+0.70        Stream          2_433_220     66.84    0.23 GB
+0.70        Stream/Path     3_449_724     39.05    0.19 GB
+
+0.69        Enum           61_961_756   1482.70   66.43 GB
+0.69        Stream         61_961_756    594.15    0.23 GB
+0.69        Stream/Path    13_080_482    148.03    0.19 GB
+
+0.68        Stream/Path    27_260_604    356.18    0.45 GB
+
+0.67        Stream/Path   174_874_633   1513.48    0.19 GB  * old version
+
+Benchmarking for week = 6 with picks (with logging)
+Threshold    Func                Paths           Time
+0.74         Stream                 82       0.243103
+0.73         Stream              1_092       0.505637
+0.72         Stream              2_978       0.488754
+0.71         Stream              6_565       0.238408
+0.70         Stream             13_959       0.306899
+0.69         Stream             20_896       0.349672
+0.68         Stream             25_972       0.395589
+0.67         Stream             62_262       0.678287
+0.66         Stream            308_699       2.701326
+0.65         Stream            354_966       3.120775
+0.64         Stream            354_966       3.160029
+0.63         Stream            871_036       7.353442
+0.62         Stream          9_408_908      64.533385
+0.61         Stream         19_332_418     133.362729
+0.60         Stream         33_967_151     237.914030
+
+Threshold    Func                Paths           Time
+0.74         Stream/Path            64       0.380516
+0.73         Stream/Path           866       0.356910
+0.72         Stream/Path         2_293       0.407532
+0.71         Stream/Path         4_924       0.386216
+0.70         Stream/Path        10_631       0.491586
+0.69         Stream/Path        15_922       0.534025
+0.68         Stream/Path        16_652       0.553889
+0.67         Stream/Path        37_749       0.765167
+0.66         Stream/Path       165_758       2.223738
+0.65         Stream/Path       192_301       2.661940
+0.64         Stream/Path       192_301       2.661940
+0.63         Stream/Path       464_869       5.361220
+0.62         Stream/Path     4_158_451      39.935409
+0.61         Stream/Path     8_950_091      83.392106
+0.60         Stream/Path    15_735_748     148.611409

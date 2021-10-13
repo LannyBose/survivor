@@ -17,28 +17,38 @@ defmodule Survivor.Picks do
   def stream_picks(@end_week, _, picks, prob_so_far) do
     # IO.puts("Pickset #{System.unique_integer(~w[monotonic positive]a)}")
 
-    [
-      %Picks{
-        picks: picks,
-        probability: prob_so_far,
-        expected_return: 6562.33 * prob_so_far
-      }
-    ]
+    %Picks{
+      picks: picks,
+      probability: prob_so_far,
+      expected_return: 6562.33 * prob_so_far
+    }
   end
 
   def stream_picks(week, probabilities, previous_picks, prob_so_far) do
     Stream.filter(probabilities[week] || [], fn team_this_week ->
       is_nil(Enum.find(previous_picks, fn pick -> pick.team == team_this_week.team end))
     end)
-    |> Stream.flat_map(fn team ->
+    |> Stream.transform(%Picks{probability: 0}, fn team, best ->
       current_prob = team.win_probability * prob_so_far
 
-      stream_picks(
-        week + 1,
-        probabilities,
-        List.insert_at(previous_picks, -1, team),
-        current_prob
-      )
+      if current_prob < best.probability do
+        {[best], best}
+      else
+        best_below =
+          stream_picks(
+            week + 1,
+            probabilities,
+            List.insert_at(previous_picks, -1, team),
+            current_prob
+          )
+
+        if best_below && best_below.probability > best.probability do
+          {[best_below], best_below}
+        else
+          {[best], best}
+        end
+      end
     end)
+    |> Enum.at(-1)
   end
 end
