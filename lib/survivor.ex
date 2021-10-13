@@ -3,7 +3,7 @@ defmodule Survivor do
   Documentation for `Survivor`.
   """
 
-  @picks_so_far [
+  @picks [
     %Survivor.Probabilities{
       is_completed: true,
       team: "LAR",
@@ -37,7 +37,6 @@ defmodule Survivor do
   ]
 
   @week 6
-  @end_week 16
 
   # Benchmarking for week = 1, picks = [] (no logging until 0.69)
   #
@@ -77,34 +76,14 @@ defmodule Survivor do
 
   @threshold 0.72
 
-  def project_streaming(
-        threshold \\ @threshold,
-        week \\ @week,
-        picks \\ @picks_so_far
-      ) do
+  def project(opts \\ []) do
+    threshold = opts[:threshold] || @threshold
+    week = opts[:week] || @week
+    picks = opts[:picks] || @picks
+
     {microseconds, {count, results}} =
       :timer.tc(fn ->
         Survivor.Picks.stream(week, picks, threshold)
-        |> Enum.reduce({0, nil}, fn picks, {count, max} ->
-          if is_nil(max) || max.probability < picks.probability do
-            {count + 1, picks}
-          else
-            {count + 1, max}
-          end
-        end)
-      end)
-
-    IO.puts(
-      "Completed projections in #{microseconds / 1_000_000} seconds, evaluating #{count} paths."
-    )
-
-    results
-  end
-
-  def project(week \\ @week, picks \\ @picks_so_far, threshold \\ @threshold) do
-    {microseconds, {count, results}} =
-      :timer.tc(fn ->
-        Survivor.Picks.run(week, picks, threshold)
         |> Enum.reduce({0, nil}, fn picks, {count, max} ->
           if is_nil(max) || max.probability < picks.probability do
             {count + 1, picks}

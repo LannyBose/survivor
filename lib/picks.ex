@@ -11,60 +11,34 @@ defmodule Survivor.Picks do
       |> Probabilities.filter_by_threshold(threshold)
       |> Probabilities.by_week()
 
-    stream_picks(week, probs_by_week, picks)
+    stream_picks(week, probs_by_week, picks, 1)
   end
 
-  def stream_picks(@end_week, _, picks) do
-    probability = Enum.reduce(picks, 1, fn pick, acc -> acc * pick.win_probability end)
+  def stream_picks(@end_week, _, picks, prob_so_far) do
     # IO.puts("Pickset #{System.unique_integer(~w[monotonic positive]a)}")
 
     [
       %Picks{
         picks: picks,
-        probability: probability,
-        expected_return: 6562.33 * probability
+        probability: prob_so_far,
+        expected_return: 6562.33 * prob_so_far
       }
     ]
   end
 
-  def stream_picks(week, probabilities, previous_picks) do
+  def stream_picks(week, probabilities, previous_picks, prob_so_far) do
     Stream.filter(probabilities[week] || [], fn team_this_week ->
       is_nil(Enum.find(previous_picks, fn pick -> pick.team == team_this_week.team end))
     end)
     |> Stream.flat_map(fn team ->
-      stream_picks(week + 1, probabilities, List.insert_at(previous_picks, -1, team))
-    end)
-  end
+      current_prob = team.win_probability * prob_so_far
 
-  def run(week, picks, threshold) do
-    probs_by_week =
-      Probabilities.team_game_probabilities()
-      |> Probabilities.filter_by_threshold(threshold)
-      |> Probabilities.by_week()
-
-    build_picks(week, probs_by_week, picks)
-    |> List.flatten()
-  end
-
-  def build_picks(@end_week, _, picks) do
-    probability = Enum.reduce(picks, 1, fn pick, acc -> acc * pick.win_probability end)
-    # IO.puts("Pickset #{System.unique_integer(~w[monotonic positive]a)}")
-
-    [
-      %Picks{
-        picks: picks,
-        probability: probability,
-        expected_return: 6562.33 * probability
-      }
-    ]
-  end
-
-  def build_picks(week, probabilities, previous_picks) do
-    Enum.filter(probabilities[week] || [], fn team_this_week ->
-      is_nil(Enum.find(previous_picks, fn pick -> pick.team == team_this_week.team end))
-    end)
-    |> Enum.flat_map(fn team ->
-      build_picks(week + 1, probabilities, List.insert_at(previous_picks, -1, team))
+      stream_picks(
+        week + 1,
+        probabilities,
+        List.insert_at(previous_picks, -1, team),
+        current_prob
+      )
     end)
   end
 end
