@@ -43,7 +43,7 @@ defmodule Survivor do
   # 0.61         Stream    19_332_418     133.362729
   # 0.60         Stream    33_967_151     237.914030
 
-  @threshold 0.72
+  @threshold 0.65
 
   def project(opts \\ []) do
     threshold = opts[:threshold] || @threshold
