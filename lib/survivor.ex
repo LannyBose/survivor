@@ -4,8 +4,10 @@ defmodule Survivor do
   """
 
   @picks []
+  # Previous picks to already take into account
 
   @week 1
+  # What week to start projecting from
 
   # Benchmarking for week = 1, picks = [] (no logging until 0.69)
   #
@@ -43,7 +45,14 @@ defmodule Survivor do
   # 0.61         Stream    19_332_418     133.362729
   # 0.60         Stream    33_967_151     237.914030
 
-  @threshold 0.65
+
+  @threshold 0.66
+  # The threshold means "throw out any games where the favored team
+  # isn't at least _this_ favored to win
+
+  # It's possible that you'll miss out on more-overall-favored outcomes
+  # by keeping the threshold high, but computation times go up
+  # as you include more plausible choices to evaluate.
 
   def project(opts \\ []) do
     threshold = opts[:threshold] || @threshold
