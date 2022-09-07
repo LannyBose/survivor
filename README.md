@@ -38,21 +38,15 @@ Survivor.project(
 )
 ```
 
+## Time to compute
 
-## Installation
+Benchmarking in 2022 start-of-season on an M1 Mac
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `survivor` to your list of dependencies in `mix.exs`:
+Threshold     Time to compute
+.68              25.197168 seconds
+.675             67.476598 seconds
+.66             179.572148 seconds
+.65             822.733092 seconds
+.64            4252.973664 seconds
 
-```elixir
-def deps do
-  [
-    {:survivor, "~> 0.1.0"}
-  ]
-end
-```
-
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/survivor](https://hexdocs.pm/survivor).
-
+...all resulting in the same picks on 2022-09-07
