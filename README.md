@@ -42,6 +42,14 @@ Survivor.project(
 
 Benchmarking in 2022 start-of-season on an M1 Mac
 
+| Threshold   | Time to compute     |
+| ----------- | ------------------- |
+| .68         |   25.197168 seconds |
+| .675        |   67.476598 seconds |
+| .66         |  179.572148 seconds |
+| .65         |  822.733092 seconds |
+| .64         | 4252.973664 seconds |
+
 Threshold     Time to compute
 .68              25.197168 seconds
 .675             67.476598 seconds
