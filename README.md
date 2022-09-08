@@ -2,7 +2,7 @@
 
 This code pulls 538's ELO rankings and walks the tree of possible picks to give you the best chance of finishing a Fantasy Football Survivor league.
 
-In case you're not Elixir-y, here's some install instructions, assuming you're using ASDF as your package manager:
+In case you're not Elixir-y, here's some install instructions, assuming you're using ASDF as your language version manager:
 
 ```
 asdf plugin add elixir
