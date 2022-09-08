@@ -23,7 +23,6 @@ To run the projections from the REPL:
 
 ```
 Survivor.project(threshold: 0.68)
-
 ```
 Note that that's the _verb_ "project" as in "project the future" as opposed to the _noun_ project.
 
